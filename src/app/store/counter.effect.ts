@@ -1,19 +1,20 @@
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { decrement, increament } from "./counter.actions";
-import { tap } from "rxjs/operators";
+import { tap, withLatestFrom } from "rxjs/operators";
 import { Injectable } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { selectCount } from "./counter.selector";
 
 @Injectable()
 export class CounterEffect {
     saveCount = createEffect(() => this.actions$.pipe(
         ofType(increament, decrement),
-        tap((action) => {
+        withLatestFrom(this.store.select(selectCount)),
+        tap(([action, counter]) => {
             console.log(action);
-            // persist only the numeric value to localStorage
-            // action has the shape { value: number, type: string }
-            localStorage.setItem('count', JSON.stringify(action.value));
+            localStorage.setItem('count', JSON.stringify(counter));
         })
     ), { dispatch: false });
 
-    constructor(private actions$: Actions) { }
+    constructor(private actions$: Actions, private store: Store<{counter: number}>) { }
 }
