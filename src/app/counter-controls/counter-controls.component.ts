@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { increament as addUp } from '../store/counter.actions';
+import { increament, decrement } from '../store/counter.actions';
 
 @Component({
   selector: 'app-counter-controls',
@@ -14,10 +14,10 @@ export class CounterControlsComponent {
   constructor(private store: Store) { }
 
   increment() {
-    this.store.dispatch(addUp({value: 5}));
+    this.store.dispatch(increament({value: 1}));
   }
 
   decrement() {
-    
+    this.store.dispatch(decrement({value: 3}));
   }
 }

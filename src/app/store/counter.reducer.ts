@@ -1,11 +1,12 @@
 import { createReducer, on } from "@ngrx/store";
-import { increament } from "./counter.actions";
+import { decrement, increament } from "./counter.actions";
 
 const initialState = 0;
 
 export const counterReducer = createReducer(
     initialState,
-    on(increament, (state, action) => state + action.value)
+    on(increament, (state, action) => state + action.value),
+    on(decrement, (state, action) => state - action.value)
 );
 
 // older way without createReducer
