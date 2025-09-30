@@ -5,12 +5,13 @@ import { provideStore } from '@ngrx/store';
 
 import { counterReducer } from './app/store/counter.reducer';
 import { provideEffects } from '@ngrx/effects';
+import { CounterEffect } from './app/store/counter.effect';
 
 bootstrapApplication(AppComponent, {
     providers: [
     provideStore({
         counter: counterReducer
     }),
-    provideEffects()
+    provideEffects(CounterEffect)
 ],
 });
