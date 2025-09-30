@@ -14,7 +14,7 @@ export class CounterControlsComponent {
   constructor(private store: Store) { }
 
   increment() {
-    this.store.dispatch(addUp());
+    this.store.dispatch(addUp({value: 5}));
   }
 
   decrement() {
